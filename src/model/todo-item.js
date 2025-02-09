@@ -1,6 +1,6 @@
 //Todo Item Class
 
-import * as validator from "../utils/validator";
+import * as validator from "../utils/validator.js";
 
 export default class TodoItem {
     #title = "";
@@ -9,11 +9,11 @@ export default class TodoItem {
     #priority = 1;
 
     
-    constructor({title, description = "", dueDate, priority}){
+    constructor({title, dueDate, priority, description = ""}){
         this.title = title;
-        this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.description = description;
     }
 
     markComplete(){
