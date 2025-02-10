@@ -1,31 +1,44 @@
 //Todo Item Class
 
-import * as validator from "../utils/validator.js";
+import {validateDate, validatePriority, validateTitle} from "../utils/validator.js";
 
 export default class TodoItem {
     #title = "";
     #completed = false;
     #dueDate;
-    #priority = 1;
-
+    #priority = Infinity;
+    #myid;
+    static #id = 0;
     
     constructor({title, dueDate, priority, description = ""}){
         this.title = title;
         this.dueDate = dueDate;
-        this.priority = priority;
+        if (priority) this.priority = priority;
         this.description = description;
+
+        TodoItem.#id++;
+        this.#myid = TodoItem.#id;
     }
 
     markComplete(){
         this.#completed = true;
     }
 
+    /**
+     * 
+     * @returns {Boolean}
+     * @description returns completed status of a todo item.
+     */
     isComplete(){
         return this.#completed;
     }
 
+    get id(){
+        return this.#myid;
+    }
+
     set dueDate(newDate){
-        if(validator.validateDate(newDate)) this.#dueDate = newDate;
+        if(validateDate(newDate)) this.#dueDate = newDate;
     } 
 
     get dueDate(){
@@ -33,7 +46,7 @@ export default class TodoItem {
     }
 
     set title(newTitle){
-        if(validator.validateTitle(newTitle)) this.#title = newTitle;
+        if(validateTitle(newTitle)) this.#title = newTitle;
     }
 
     get title(){
@@ -41,7 +54,7 @@ export default class TodoItem {
     }
 
     set priority(newPriority){
-        if(validator.validatePriority(newPriority)) this.#priority = newPriority;
+        if(validatePriority(newPriority)) this.#priority = newPriority;
     }
 
     get priority(){

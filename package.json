@@ -20,6 +20,7 @@
     "clean": "rm -rf dist/"
   },
   "dependencies": {
+    "@tyriar/fibonacci-heap": "^2.0.9",
     "date-fns": "^4.1.0",
     "modern-normalize": "^3.0.1"
   }

@@ -1,35 +1,25 @@
-import TodoItem from "./model/todo-item.js";
-import FibonnaciNode from "./utils/fibbonacci-heap/fib-node.js";
-import FibonnaciHeap from "./utils/fibbonacci-heap/fibonacci-heap.js";
+import TodoItem from "./model/todo-item";
+import Project from "./model/project";
 
+class Arr {
+    arr = {};
 
-const heap1 = new FibonnaciHeap(1, "lol");
+    insert(id, value){
+        this.arr[id] = value;
+    }
 
-heap1.insert(2, "hahaha");
-heap1.insert(3, "lmao");
-heap1.insert(4, "amsdasd");
-heap1.insert(5, "amsdasd");
+    delete(id){
+        delete this.arr[id];
+    }
+}
 
-console.log(heap1.toString())
-console.log(heap1.extractMin().toString());
-console.log(heap1.minNode.toString());
-console.log(heap1.toString())
+let todo1 = new TodoItem({title:"lol", dueDate:new Date()});
+console.log(todo1);
 
-console.log(heap1.extractMin().toString());
-console.log(heap1.minNode.toString());
-console.log(heap1.toString());
+const project1 = new Project({name:"Lol", description:"haha", dataStructure:new Arr()});
 
-console.log(heap1.extractMin().toString());
-console.log(heap1.minNode.toString());
-console.log(heap1.toString());
+project1.addTodo(todo1);
+console.log(project1);
 
-console.log(heap1.extractMin().toString());
-console.log(heap1.minNode.toString());
-console.log(heap1.toString());
-
-console.log(heap1.extractMin().toString());
-console.log(heap1.minNode.toString());
-console.log(heap1.toString());
-
-heap1.insert(2, "hahaha");
-console.log(heap1.toString());
+project1.removeTodo(todo1.id);
+console.log(project1.json());

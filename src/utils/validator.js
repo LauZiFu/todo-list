@@ -24,3 +24,11 @@ export function validatePriority(id){
     }    
     return true;
 }
+
+export function validateWholeNumber(id){
+    if (!Number.isInteger(id) || id <= 0) {
+        logMessage("Invalid argument: Must be a whole number (positive integer).");
+        return false;
+    }    
+    return true;
+}
