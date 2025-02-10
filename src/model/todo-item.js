@@ -33,6 +33,14 @@ export default class TodoItem {
         return this.#completed;
     }
 
+    static setLatestId(newId){
+        TodoItem.#id = newId
+    }
+
+    set id(newId){
+        this.#myid = newId;
+    }
+
     get id(){
         return this.#myid;
     }
@@ -59,5 +67,16 @@ export default class TodoItem {
 
     get priority(){
         return this.#priority;
+    }
+
+    json(){
+        return {
+            todoId:this.id, 
+            priority:this.priority, 
+            title:this.title, 
+            description: this.description,
+            completed: this.isComplete(), 
+            dueDate:this.dueDate
+        }
     }
 }

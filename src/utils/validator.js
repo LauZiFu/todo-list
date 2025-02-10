@@ -1,5 +1,5 @@
 
-import logMessage from "./logger";
+import logMessage from "./logger.js";
 
 export function validateDate(newDate){
     if (!(newDate instanceof Date)){
@@ -31,4 +31,8 @@ export function validateWholeNumber(id){
         return false;
     }    
     return true;
+}
+
+export function validateTodoItem(newTitle, newDate, priority){
+    return validateDate(newDate) && validateTitle(newTitle) && validatePriority(priority);
 }

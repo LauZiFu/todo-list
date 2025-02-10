@@ -13,7 +13,7 @@ export default class Project {
     }
 
     addTodo(todoItem){
-        this.#itemList.insert(todoItem.id, todoItem);
+        this.#itemList.insert(todoItem);
     }
 
     removeTodo(itemId){
@@ -21,8 +21,8 @@ export default class Project {
     }
 
     changeTodo(itemId, newTodoItem){
-        this.removeItem(itemId);
-        this.addItem(newTodoItem.id, newTodoItem);
+        this.removeTodo(itemId);
+        this.addTodo(newTodoItem);
     }
 
     clearProject(){
@@ -35,11 +35,21 @@ export default class Project {
         this.#itemList = dataStructure;
     }
 
+    getTodoList(){
+        return this.#itemList.getSortedList();
+    }
+
     json(){
         return {
-            name:this.name,
+            projectId: this.#myId,
+            name: this.name,
             description: this.description,
+            items: this.#itemList.json()
         }
+    }
+
+    set id(newId){
+        this.#myId = newId;
     }
 
     get id() {

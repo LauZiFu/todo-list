@@ -1,25 +1,20 @@
-import TodoItem from "./model/todo-item";
-import Project from "./model/project";
+import {
+    addItemToProject, 
+    addProject, 
+    getProjects, 
+    json, 
+    removeItemfromProject
+} from "./model/projects-manager.js";
 
-class Arr {
-    arr = {};
+import { prettyPrintJSON } from "./utils/string-utils.js";
 
-    insert(id, value){
-        this.arr[id] = value;
-    }
+const newProject = addProject({name: "Lol", description:"asdfasd"});
 
-    delete(id){
-        delete this.arr[id];
-    }
-}
+addItemToProject(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
+addItemToProject(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
+addItemToProject(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
 
-let todo1 = new TodoItem({title:"lol", dueDate:new Date()});
-console.log(todo1);
+removeItemfromProject(newProject.id, 1);
 
-const project1 = new Project({name:"Lol", description:"haha", dataStructure:new Arr()});
-
-project1.addTodo(todo1);
-console.log(project1);
-
-project1.removeTodo(todo1.id);
-console.log(project1.json());
+console.log(prettyPrintJSON(json()));
+console.log(getProjects());
