@@ -20,11 +20,6 @@ export default class Project {
         this.#itemList.delete(itemId);
     }
 
-    changeTodo(itemId, newTodoItem){
-        this.removeTodo(itemId);
-        this.addTodo(newTodoItem);
-    }
-
     clearProject(){
         this.#itemList.clear();
     }
@@ -37,6 +32,10 @@ export default class Project {
 
     getTodoList(){
         return this.#itemList.getSortedList();
+    }
+
+    getTodoItem(id){
+        return this.#itemList.getItem(id);
     }
 
     json(){

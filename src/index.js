@@ -1,20 +1,13 @@
-import {
-    addItemToProject, 
-    addProject, 
-    getProjects, 
-    json, 
-    removeItemfromProject
-} from "./model/projects-manager.js";
-
+import ProjectManager from "./model/project-manager.js";
 import { prettyPrintJSON } from "./utils/string-utils.js";
 
-const newProject = addProject({name: "Lol", description:"asdfasd"});
+const newProject = ProjectManager.addProject({name: "Lol", description:"asdfasd"});
 
-addItemToProject(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
-addItemToProject(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
-addItemToProject(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
+ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
+ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
+ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
 
-removeItemfromProject(newProject.id, 1);
+ProjectManager.removeTodo(newProject.id, 1);
 
-console.log(prettyPrintJSON(json()));
-console.log(getProjects());
+console.log(prettyPrintJSON(ProjectManager.json()));
+console.log(ProjectManager.getProjects());
