@@ -18,7 +18,7 @@ export function validateTitle(newTitle){
 }
 
 export function validatePriority(id){
-    if (typeof id !== "number" || id <= 0) {
+    if (id == Infinity && (typeof id !== "number" || id <= 0)) {
         logMessage("Invalid Priority Int: Must be a positive number.");
         return false;
     }    

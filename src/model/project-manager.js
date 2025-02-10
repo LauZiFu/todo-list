@@ -9,18 +9,22 @@ export default class ProjectManager {
     static projects = new TodoList();
 
     static addProject({name, description, projectId = 0, items = []}){
-        const newProject = new Project({name, description, dataStructure: new TodoList()});
+        
+        let newProject;
+        if(!Array.isArray(items)) {
+            newProject = new Project({name, description, dataStructure: items});
+        } else {
+            newProject = new Project({name, description, dataStructure: new TodoList()});
+        }
         ProjectManager.projects.insert(newProject);
         // On page reload
-        
-        ProjectManager.addItemsFromList(newProject, projectId, items);
         return newProject;
     }
 
     /**
      * 
      * @param {Number} projectId 
-     * @param {*} item 
+     * @param {JSON} item 
      * @returns new TodoItem object
      */
     static addNewTodo(projectId, todoJson){

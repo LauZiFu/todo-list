@@ -37,7 +37,7 @@ export default class TodoList {
 
     json(){
         return this.arr.map(({creationId, item:todoItem}) => { 
-            return {creationId, item:todoItem.json()}
+            return {key:creationId, item:todoItem.json()}
         })
     }
 }

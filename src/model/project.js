@@ -25,8 +25,8 @@ export default class Project {
     }
 
     changeFilter(dataStructure){
-        const arr = this.#itemList.getSortedList()
-        arr.forEach((elem) => dataStructure.insert(elem.id, elem))
+        const arr = this.getTodoList();
+        arr.forEach((elem) => dataStructure.insert(elem.item));
         this.#itemList = dataStructure;
     }
 
@@ -37,6 +37,7 @@ export default class Project {
     getTodoItem(id){
         return this.#itemList.getItem(id);
     }
+
 
     json(){
         return {
