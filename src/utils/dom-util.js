@@ -7,7 +7,7 @@ export function getRGBColor(value, min, max){
     let r = Math.round(255 * (1-normalized));
     let g = Math.round (255 * normalized);
 
-    return `rgb(${r}. ${g}, 0)`;
+    return `rgb(${r}, ${g}, 0)`;
 }
 
 export function addChildren(elem, childList){
@@ -41,11 +41,11 @@ export function createFormSelect(id, options = []){
     // Creates option element for each value string
     options.forEach((value) => {
         newOption = document.createElement("option");
-        newOption.setAttribute("value", value);
+        newOption.value= value;
         newOption.textContent = value;
         selectElem.appendChild(newOption);
     });
-
+    
     addChildren(selectContainer, [label, selectElem]);
     return selectContainer;
 }

@@ -38,6 +38,7 @@ export default class ProjectService {
      * @returns new TodoItem object
      */
     static addNewTodo(projectId, todoJson){
+        console.log(projectId);
         const newDate = new Date(todoJson.dueDate);
         if(!validateTodoItem(todoJson.title, newDate, todoJson.priority)) return false;
 
@@ -57,6 +58,10 @@ export default class ProjectService {
      */
     static removeTodo(projectId, todoId){
         ProjectService.getProject(projectId).removeTodo(todoId);
+    }
+
+    static getTodo(projectId, todoId){
+        return ProjectService.projects.getItem(projectId).getTodoItem(todoId);
     }
 
     static getProject(projectId){

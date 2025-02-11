@@ -1,15 +1,17 @@
-import ProjectManager from "./services/project.js";
-import { prettyPrintJSON } from "./utils/string.js";
 
-const projOneID = ProjectManager.addProject({name: "Lol", description:"asdfasd"});
+import ProjectService from "./services/project-service.js";
+import ProjectView from "./views/project-view.js";
+import TodoView from "./views/todo-view.js";
+import { addTodoControl } from "./controllers/todo-control.js";
+import PriorityTree from "./models/data-structures/priority-tree.js";
+
+const mainDiv = document.querySelector(".main-container");
+const projOneID = ProjectService.addProject({name: "Lol", description:"asdfasd"});
+const proj1 = ProjectService.getProject(projOneID);
 
 
-ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
-ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:5, description:"haha"});
-ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:4, description:"haha"});
-ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:3, description:"haha"});
+ProjectService.addNewTodo(projOneID, {title:"lol", dueDate:"2002-10-22", priority:5});
+const projOneRender = new ProjectView(proj1, TodoView, addTodoControl);
 
-console.log(prettyPrintJSON(ProjectManager.getProject(projOneID).json()));
-ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
-
-console.log(prettyPrintJSON(ProjectManager.getProject(projOneID).json()));
+projOneRender.render();
+proj1.changeFilter(new PriorityTree());

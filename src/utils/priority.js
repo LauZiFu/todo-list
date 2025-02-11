@@ -18,7 +18,7 @@ export function hashPriority(priority, itemId){
 
 export function getPriorityRange(){
     const range = [];
-    for(let i = MINPRIORITY; i <= MAXPRIORITY; i++){
+    for(let i = MAXPRIORITY; i <= MINPRIORITY; i++){
         range.push(i);
     }
     return range;

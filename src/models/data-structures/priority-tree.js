@@ -9,6 +9,10 @@ export default class PriorityTree extends TodoTree{
         this.#tree.setIfNotPresent(hashPriority(todoItem.priority, todoItem.id), todoItem);
     }
 
+    getItem(id){
+        return this.#tree.get(id);
+    }
+
     json(){
         return this.#tree.toArray().map((pair) => { 
             let id = pair[1].id;

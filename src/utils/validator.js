@@ -1,6 +1,6 @@
 
 import logMessage from "./logger.js";
-import { MINPRIORITY } from "./priority.js";
+import { MAXPRIORITY, MINPRIORITY } from "./priority.js";
 
 export function validateDate(newDate){
     if (!(newDate instanceof Date)){
@@ -19,8 +19,8 @@ export function validateTitle(newTitle){
 }
 
 export function validatePriority(id){
-    if (id > MINPRIORITY && (typeof id !== "number" || id <= 0)) {
-        logMessage("Invalid Priority: Must be integer between 1 and 5.");
+    if (id > MINPRIORITY ||  id < MAXPRIORITY || typeof id !== "number") {
+        logMessage(`Invalid Priority: Must be integer between ${MAXPRIORITY} and ${MINPRIORITY}.`);
         return false;
     }    
     return true;

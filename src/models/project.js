@@ -1,3 +1,5 @@
+import { prettyPrintJSON } from "../utils/string";
+
 export default class Project {
     #itemList;
     #myId;
@@ -27,6 +29,7 @@ export default class Project {
     changeFilter(dataStructure){
         const arr = this.getTodoList();
         arr.forEach((elem) => dataStructure.insert(elem));
+        console.log(prettyPrintJSON(dataStructure.json()));
         this.#itemList = dataStructure;
     }
 
