@@ -1,12 +1,13 @@
 //Todo Item Class
 
+import { MINPRIORITY } from "../utils/priority.js";
 import {validateDate, validatePriority, validateTitle} from "../utils/validator.js";
 
 export default class TodoItem {
     #title = "";
     #completed = false;
     #dueDate;
-    #priority = Infinity;
+    #priority = MINPRIORITY;
     #myid;
     static #id = 0;
     

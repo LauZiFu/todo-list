@@ -3,7 +3,7 @@ import logMessage from "../../utils/logger.js";
 /**
  * Base class for todo list subclasses
  */
-export default class TodoList {
+export default class ProjectList {
     arr = [];
 
     insert(item){

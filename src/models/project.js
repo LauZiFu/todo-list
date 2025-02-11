@@ -26,7 +26,7 @@ export default class Project {
 
     changeFilter(dataStructure){
         const arr = this.getTodoList();
-        arr.forEach((elem) => dataStructure.insert(elem.item));
+        arr.forEach((elem) => dataStructure.insert(elem));
         this.#itemList = dataStructure;
     }
 
@@ -37,7 +37,6 @@ export default class Project {
     getTodoItem(id){
         return this.#itemList.getItem(id);
     }
-
 
     json(){
         return {
@@ -54,5 +53,9 @@ export default class Project {
 
     get id() {
         return this.#myId;
+    }
+
+    static setLatestId(newId){
+        Project.#id = newId;
     }
 }

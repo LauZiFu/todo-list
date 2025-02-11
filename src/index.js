@@ -1,22 +1,15 @@
-import ProjectManager from "./model/project-manager.js";
-import { prettyPrintJSON } from "./utils/string-utils.js";
-import TodoTree from "./model/data-structures/todo-tree.js";
+import ProjectManager from "./services/project.js";
+import { prettyPrintJSON } from "./utils/string.js";
 
-const newProject = ProjectManager.addProject({name: "Lol", description:"asdfasd"});
+const projOneID = ProjectManager.addProject({name: "Lol", description:"asdfasd"});
 
 
-ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
-ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
-ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
-ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:3, description:"haha"});
+ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
+ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:5, description:"haha"});
+ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:4, description:"haha"});
+ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:3, description:"haha"});
 
-console.log(prettyPrintJSON(ProjectManager.getProject(newProject.id).json()));
-ProjectManager.addNewTodo(newProject.id, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
+console.log(prettyPrintJSON(ProjectManager.getProject(projOneID).json()));
+ProjectManager.addNewTodo(projOneID, {title:"haha", dueDate:"2002-12-22", priority:1, description:"haha"});
 
-console.log(prettyPrintJSON(ProjectManager.getProject(newProject.id).json()));
-newProject.changeFilter(new TodoTree());
-
-console.log(ProjectManager.getProject(newProject.id).getTodoList());
-ProjectManager.addProject({name: "Lol", description:"asdfasd"});
-
-console.log(prettyPrintJSON(ProjectManager.json()));
+console.log(prettyPrintJSON(ProjectManager.getProject(projOneID).json()));
