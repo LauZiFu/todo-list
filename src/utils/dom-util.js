@@ -13,6 +13,7 @@ export function getRGBColor(value, min, max){
 export function addChildren(elem, childList){
     childList.forEach((child) => elem.appendChild(child));
 }
+
 /**
  * 
  * @param {Node} elem 
@@ -23,6 +24,15 @@ export function setAttributes(elem, attributes, value){
     attributes.forEach((attribute) => elem.setAttribute(attribute, value));
 }
 
+/**
+ * 
+ * @param {Array.<Node>} nodeList 
+ * @param {string} attribute 
+ * @param {*} value 
+ */
+export function setAttributeNodes(nodeList, attribute, value){
+    nodeList.forEach((node => node.setAttribute(attribute, value)));
+}
 
 /**
  * 
@@ -48,4 +58,14 @@ export function createFormSelect(id, options = []){
     
     addChildren(selectContainer, [label, selectElem]);
     return selectContainer;
+}
+
+export function createButton({textContent = "", callback = undefined, style = "", id = ""}){
+    const btn = document.createElement("button");
+
+    if(style) btn.classList.toggle(style);
+    if(id) btn.id = id;
+    if(textContent) btn.textContent = textContent;
+    if (callback) btn.addEventListener("click", (event) => callback(event));
+    return btn;
 }

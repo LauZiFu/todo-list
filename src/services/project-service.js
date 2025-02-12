@@ -11,23 +11,29 @@ export default class ProjectService {
 
     /**
      * 
-     * @param {*} projectJSON 
+     * @param {*} projectJSON
      * @returns ID of new project
      * @description Add a new project, either creating a new one or from storage
      */
     static addProject({name, description, projectId = undefined, items = undefined}){
         let newProject;
+        
         if(items) {
             let newTodoList  = items.map(({key, item}) => [key, item]);
-            newProject = new Project({name, description, dataStructure: newTodoList});
+            newProject = new Project({
+                name, 
+                description, 
+                dataStructure: new TodoTree(newTodoList)
+            });
         } else {
             newProject = new Project({name, description, dataStructure: new TodoTree()});
         } 
+        
         if(projectId){
             newProject.id = projectId;
             Project.setLatestId(projectId);
         }
-        ProjectService.projects.insert(newProject);
+        this.projects.insert(newProject);
         return newProject.id;
     }
     
@@ -38,7 +44,6 @@ export default class ProjectService {
      * @returns new TodoItem object
      */
     static addNewTodo(projectId, todoJson){
-        console.log(projectId);
         const newDate = new Date(todoJson.dueDate);
         if(!validateTodoItem(todoJson.title, newDate, todoJson.priority)) return false;
 
@@ -46,7 +51,7 @@ export default class ProjectService {
         todoJson.dueDate = newDate;
         const newTodoItem = new TodoItem(todoJson);
 
-        ProjectService.getProject(projectId).addTodo(newTodoItem);
+        ProjectService.projects.getItem(projectId).addTodo(newTodoItem);
         return newTodoItem.id;
     }
 
@@ -57,26 +62,26 @@ export default class ProjectService {
      * @description Removes a TodoItem from a project, by its ID.
      */
     static removeTodo(projectId, todoId){
-        ProjectService.getProject(projectId).removeTodo(todoId);
+        this.getProject(projectId).removeTodo(todoId);
     }
 
     static getTodo(projectId, todoId){
-        return ProjectService.projects.getItem(projectId).getTodoItem(todoId);
+        return this.projects.getItem(projectId).getTodoItem(todoId);
     }
 
     static getProject(projectId){
-        return ProjectService.projects.getItem(projectId);
+        return this.projects.getItem(projectId);
     }
 
     static getProjects(){
-        return ProjectService.projects.getSortedList();
+        return this.projects.getSortedList();
     }
 
     static json(){
-        return ProjectService.projects.json();
+        return this.projects.json();
     }
 
     static removeProject(id){
-        return ProjectService.projects.delete(id);
+        return this.projects.delete(id);
     }
 }

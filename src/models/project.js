@@ -28,9 +28,8 @@ export default class Project {
 
     changeFilter(dataStructure){
         const arr = this.getTodoList();
-        arr.forEach((elem) => dataStructure.insert(elem));
-        console.log(prettyPrintJSON(dataStructure.json()));
         this.#itemList = dataStructure;
+        arr.forEach((elem) => this.#itemList.insert(elem));
     }
 
     getTodoList(){
@@ -43,7 +42,7 @@ export default class Project {
 
     json(){
         return {
-            projectId: this.#myId,
+            key: this.#myId,
             name: this.name,
             description: this.description,
             items: this.#itemList.json()

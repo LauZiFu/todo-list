@@ -1,25 +1,33 @@
-import { BTree } from "@tylerbu/sorted-btree-es6";
+
 import TodoTree from "./todo-tree";
-import { hashPriority, reverseHash, getPriorityRange } from "../../utils/priority";
+import { hashPriority, getPriorityRange } from "../../utils/priority";
 
 export default class PriorityTree extends TodoTree{
-    #tree = new BTree();
+
+    constructor(itemList = []){
+        super();
+        if(itemList) itemList.forEach(({key,item}) => this.insert(item));
+    }
 
     insert(todoItem){
-        this.#tree.setIfNotPresent(hashPriority(todoItem.priority, todoItem.id), todoItem);
+        super.getTree().setIfNotPresent(hashPriority(todoItem.priority, todoItem.id), todoItem);
+    }
+
+    getTree(){
+        return super.getTree.clone();
     }
 
     getItem(id){
         let priority;
         for(let i = 0; i < getPriorityRange().length; i++ ){
             priority = getPriorityRange()[i];
-            if(this.#tree.get(hashPriority(priority, id)))
-                return this.#tree.get(hashPriority(priority, id))
+            if(super.getTree().get(hashPriority(priority, id)))
+                return super.getTree().get(hashPriority(priority, id))
         }
     }
 
     json(){
-        return this.#tree.toArray().map((pair) => { 
+        return super.getTree().toArray().map((pair) => { 
             let id = pair[1].id;
             return {key: id, item:pair[1].json()}
         });

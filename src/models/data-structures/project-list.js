@@ -7,11 +7,12 @@ export default class ProjectList {
     arr = [];
 
     insert(item){
-        this.arr.push({creationId:item.id, item});
+        this.arr.push({key: item.id, item});
+
     }
 
     delete(id){
-        const myId = this.arr.findIndex(item => item.creationId == id);
+        const myId = this.arr.findIndex(item => item.key == id);
         if(myId || myId === 0){
             this.arr.splice(myId,1);
             return true;
@@ -26,7 +27,7 @@ export default class ProjectList {
 
     getItem(id){
         for (let i =0; i < this.arr.length; i++){
-            if(this.arr[i].creationId === id)
+            if(this.arr[i].key === id)
                 return this.arr[i].item;
         }
     }
@@ -36,8 +37,8 @@ export default class ProjectList {
     }
 
     json(){
-        return this.arr.map(({creationId, item:todoItem}) => { 
-            return {key:creationId, item:todoItem.json()}
+        return this.arr.map(({key, item:todoItem}) => { 
+            return {key, item:todoItem.json()}
         })
     }
 }

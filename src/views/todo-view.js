@@ -25,12 +25,4 @@ export default class TodoView{
         addChildren(todoDiv, [todoTitle, description, checkBox, priorityLogo]);
         return todoDiv;
     }
-
-    addToProject(projectId){
-
-        const itemListDiv = document.querySelector(`#projectId${projectId} .item-list-div`);
-
-        const todoDiv = this.render();
-        itemListDiv.appendChild(todoDiv);
-    }
 }

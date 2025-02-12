@@ -1,8 +1,12 @@
 import { BTree } from "@tylerbu/sorted-btree-es6";
 
 export default class TodoTree {
-    #tree = new BTree();
+    #tree;
 
+    constructor(itemList = []){
+        this.#tree = new BTree(itemList);
+    }
+    
     insert(todoItem){
         this.#tree.setIfNotPresent(todoItem.id, todoItem);
     }
@@ -17,6 +21,10 @@ export default class TodoTree {
 
     getItem(id){
         return this.#tree.get(id);
+    }
+    
+    getTree(){
+        return this.#tree;
     }
 
     clear(){
