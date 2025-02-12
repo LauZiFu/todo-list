@@ -13,6 +13,15 @@ export default class PriorityTree extends TodoTree{
         super.getTree().setIfNotPresent(hashPriority(todoItem.priority, todoItem.id), todoItem);
     }
 
+    delete(id){
+        let priority;
+        for(let i = 0; i < getPriorityRange().length; i++ ){
+            priority = getPriorityRange()[i];
+            if(super.getTree().get(hashPriority(priority, id)))
+                super.delete(hashPriority(priority, id));
+        }
+    }
+
     getTree(){
         return super.getTree.clone();
     }

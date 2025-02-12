@@ -1,4 +1,23 @@
+import TodoTree from "../models/data-structures/todo-tree";
+import PriorityTree from "../models/data-structures/priority-tree";
 
+export const FILTERS = (function(){
+    const filters = {
+        ID: TodoTree,
+        DATE: "DATE",
+        PRIORITY: PriorityTree
+    }
+    return {...filters}
+})()
+
+
+export function getDOMprojectID(id){
+    return `project${id}`;
+}
+
+export function getDOMtodoID(id){
+    return `todo${id}`;
+}
 
 export function getRGBColor(value, min, max){
     let normalized = (value - min)/(max - min);
@@ -51,7 +70,7 @@ export function createFormSelect(id, options = []){
     // Creates option element for each value string
     options.forEach((value) => {
         newOption = document.createElement("option");
-        newOption.value= value;
+        newOption.value = value;
         newOption.textContent = value;
         selectElem.appendChild(newOption);
     });
@@ -69,3 +88,4 @@ export function createButton({textContent = "", callback = undefined, style = ""
     if (callback) btn.addEventListener("click", (event) => callback(event));
     return btn;
 }
+

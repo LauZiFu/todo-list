@@ -1,10 +1,11 @@
+import { ProjectsControl } from "../controllers/projects-control";
 
-class mainView{
-    constructor(projects){
-        this.projects = projects;
-    }
+export default class MainView{
+    static render(projects){
+        const filterBtn = document.querySelector("#filter-btn");
 
-    render(){
-        
+        filterBtn.addEventListener("click", ()=>{
+            ProjectsControl.changeFilter(parseInt(filterBtn.dataset.key), "PRIORITY");
+        })
     }
 }

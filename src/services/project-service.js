@@ -62,25 +62,34 @@ export default class ProjectService {
      * @description Removes a TodoItem from a project, by its ID.
      */
     static removeTodo(projectId, todoId){
-        this.getProject(projectId).removeTodo(todoId);
+        this.projects.getItem(projectId).removeTodo(todoId);
+        console.log(this.projects.getItem(projectId));
+    }
+
+    static changeFilter(projectId, dataStructure){
+        this.projects.getItem(projectId).changeFilter(dataStructure);
     }
 
     static getTodo(projectId, todoId){
         return this.projects.getItem(projectId).getTodoItem(todoId);
     }
 
+
     static getProject(projectId){
         return this.projects.getItem(projectId);
     }
+
 
     static getProjects(){
         return this.projects.getSortedList();
     }
 
+
     static json(){
         return this.projects.json();
     }
 
+    
     static removeProject(id){
         return this.projects.delete(id);
     }

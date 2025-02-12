@@ -1,6 +1,7 @@
 
 import logMessage from "./logger.js";
 import { MAXPRIORITY, MINPRIORITY } from "./priority.js";
+import { FILTERS } from "./dom-util.js";
 
 export function validateDate(newDate){
     if (!(newDate instanceof Date)){
@@ -31,6 +32,14 @@ export function validateWholeNumber(id){
         logMessage("Invalid argument: Must be a whole number (positive integer).");
         return false;
     }    
+    return true;
+}
+
+export function validateFilter(filter){
+    if(!Object.getOwnPropertyNames(FILTERS).some((filterName) => filterName === filter)){
+        logMessage("Invalid argument: Must be a whole number (positive integer).");
+        return false;
+    }
     return true;
 }
 
