@@ -13,7 +13,8 @@ export default class SidebarView{
         const sideButtons = projects.map((element) => {
             return createButton({
                 textContent: element.name, 
-                callback: () => ProjectView.render(element)
+                callback: () => ProjectView.render(element),
+                style: "svg-btn"
             });
         });
 
