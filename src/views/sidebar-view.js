@@ -2,23 +2,22 @@ import { addChildren, createButton } from "../utils/dom-util";
 import ProjectView from "./project-view";
 
 export default class SidebarView{
-    #projectNav = document.querySelector("#project-nav");
-    #addProjBtn = document.querySelector("#addProjBtn");
 
-    constructor(projectsList){
-        this.projectsList = projectsList.map(({key,item}) => item);
-    }
+    static render(projectsList){
+        const projectNav = document.querySelector("#project-nav");
+        const addProjBtn = document.querySelector("#addProjBtn");
+    
+        const projects = projectsList.map(({key,item}) => item);
+        projectNav.innerHTML = "";
 
-    render(){
-        this.#projectNav.innerHTML = "";
-        const sideButtons = this.projectsList.map((element) => {
+        const sideButtons = projects.map((element) => {
             return createButton({
                 textContent: element.name, 
                 callback: () => ProjectView.render(element)
             });
         });
 
-        addChildren(this.#projectNav, sideButtons);
+        addChildren(projectNav, sideButtons);
         sideButtons[sideButtons.length-1].dispatchEvent(new Event("click"));
     }
 }

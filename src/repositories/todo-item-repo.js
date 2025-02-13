@@ -1,4 +1,4 @@
-import { ProjectRepo } from "./project";
+import { ProjectRepo } from "./project-repo.js";
 
 export const TodoRepo = {
     storeTodo(projectId, projectJson){

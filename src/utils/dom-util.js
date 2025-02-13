@@ -1,23 +1,5 @@
-import TodoTree from "../models/data-structures/todo-tree";
-import PriorityTree from "../models/data-structures/priority-tree";
-
-export const FILTERS = (function(){
-    const filters = {
-        ID: TodoTree,
-        DATE: "DATE",
-        PRIORITY: PriorityTree
-    }
-    return {...filters}
-})()
 
 
-export function getDOMprojectID(id){
-    return `project${id}`;
-}
-
-export function getDOMtodoID(id){
-    return `todo${id}`;
-}
 
 export function getRGBColor(value, min, max){
     let normalized = (value - min)/(max - min);

@@ -1,5 +1,6 @@
 import { MAXPRIORITY, MINPRIORITY } from "../utils/priority.js";
-import { addChildren, getRGBColor, createButton, getDOMtodoID } from "../utils/dom-util.js";
+import { addChildren, getRGBColor, createButton} from "../utils/dom-util.js";
+import { getDOMtodoID } from "../styles/css-config.js"
 import { ProjectsControl } from "../controllers/projects-control.js";
 import logMessage from "../utils/logger.js";
 

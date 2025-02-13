@@ -1,7 +1,7 @@
 
 import logMessage from "./logger.js";
 import { MAXPRIORITY, MINPRIORITY } from "./priority.js";
-import { FILTERS } from "./dom-util.js";
+import { FILTERS } from "../styles/css-config.js";
 
 export function validateDate(newDate){
     if (!(newDate instanceof Date)){

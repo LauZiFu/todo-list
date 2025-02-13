@@ -1,9 +1,9 @@
 import ProjectService from "../services/project-service";
 import ProjectView from "../views/project-view";
 import SidebarView from "../views/sidebar-view";
-import {validateFilter, validateWholeNumber} from "../utils/validator.js"
-import { FILTERS } from "../utils/dom-util.js";
-import {prettyPrintJSON} from "../utils/string.js"
+import { validateFilter, validateWholeNumber } from "../utils/validator.js"
+import { FILTERS } from "../styles/css-config.js";
+import { prettyPrintJSON } from "../utils/string.js"
 
 import TodoView from "../views/todo-view.js";
 
@@ -11,14 +11,13 @@ export class ProjectsControl{
     static addTodoHandler(projectId, todoJSON){
         if(validateWholeNumber(projectId)){
             ProjectService.addNewTodo(projectId, todoJSON);
-            ProjectsControl.loadProject(projectId);
+            ProjectView.renderTodoList(ProjectService.getProject(projectId));
         }
     }
 
     static addProject(projectJSON){
         ProjectService.addProject(projectJSON);
-        const sideBarView = new SidebarView(ProjectService.getProjects());
-        sideBarView.render();
+        SidebarView.render(ProjectService.getProjects());
     }
 
     static loadProject(projectId){
@@ -37,10 +36,8 @@ export class ProjectsControl{
     }
 
     static changeFilter(projectId, filter){
-        let newFilter;
-
         if(validateFilter(filter) && validateWholeNumber(projectId)){
-            newFilter = new FILTERS[filter];
+            const newFilter = FILTERS[filter];
             ProjectService.changeFilter(projectId, newFilter);
             ProjectView.render(ProjectService.getProject(projectId));
         }

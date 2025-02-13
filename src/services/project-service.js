@@ -63,7 +63,6 @@ export default class ProjectService {
      */
     static removeTodo(projectId, todoId){
         this.projects.getItem(projectId).removeTodo(todoId);
-        console.log(this.projects.getItem(projectId));
     }
 
     static changeFilter(projectId, dataStructure){
