@@ -29,7 +29,9 @@ export default class Project {
     changeFilter(dataStructure){
         const arr = this.getTodoList();
         this.#itemList = dataStructure;
-        arr.forEach((elem) => this.#itemList.insert(elem));
+
+        arr.forEach((elem) => {
+            this.#itemList.insert(elem)});
     }
 
     getTodoList(){

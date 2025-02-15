@@ -11,6 +11,7 @@ export class ProjectsControl{
     static addTodoHandler(projectId, todoJSON){
         if(validateWholeNumber(projectId)){
             ProjectService.addNewTodo(projectId, todoJSON);
+            console.log(ProjectService.getProject(projectId).json());
             ProjectView.renderTodoList(ProjectService.getProject(projectId));
         }
     }
@@ -37,7 +38,7 @@ export class ProjectsControl{
 
     static changeFilter(projectId, filter){
         if(validateFilter(filter) && validateWholeNumber(projectId)){
-            const newFilter = FILTERS[filter];
+            const newFilter = new FILTERS[filter]();
             ProjectService.changeFilter(projectId, newFilter);
             ProjectView.render(ProjectService.getProject(projectId));
         }

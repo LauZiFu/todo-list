@@ -1,14 +1,12 @@
-import TodoTree from "../models/data-structures/todo-tree";
-import PriorityTree from "../models/data-structures/priority-tree";
+import TodoTree from "../models/data-structures/todo-tree.js";
+import PriorityTree from "../models/data-structures/priority-tree.js";
+import NewestTree from "../models/data-structures/newest-tree.js";
 
 export const FILTERS = (function(){
     const filters = {
-        get ID(){
-            return new TodoTree;
-        },
-        get PRIORITY() {
-            return new PriorityTree;
-        }
+        OLDEST: TodoTree,
+        PRIORITY: PriorityTree,
+        NEWEST: NewestTree
     }
 
     return {...filters}

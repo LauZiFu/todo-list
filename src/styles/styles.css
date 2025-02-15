@@ -53,9 +53,9 @@ body {
     border:1px solid red;
     height: 100vh;
 }
+
+
 /*Styling*/
-
-
 
 .body-container {
     display: grid;
@@ -68,13 +68,21 @@ body {
     display: flex;
     flex-direction: column;
     width:100%;
-    gap:1em;
+    gap: 0.7em;
+}
+
+.sidebar > .container {
+    gap: 2.5em;
 }
 
 .sidebar {
     grid-row: 1/4;
     grid-column: 1/2;
     border: 1px solid red;
+}
+
+.sidebar button{
+    font-size: larger;
 }
 
 .sidebar,
@@ -84,10 +92,17 @@ body {
     padding: 1rem;
 }
 
+
 header.main-header {
     grid-row: 1/2;
     grid-column: 2/3;
     border: 1px solid red;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .main-container {
@@ -100,10 +115,12 @@ footer.main-footer {
     grid-column: 2/3;
 }
 
+/* Buttons */
 button{
     background-color: white;
     padding: 0.5em 1em;
     border-radius: 0.5rem;
+    text-align: center;
 }
 
 button.svg-btn{
@@ -123,8 +140,12 @@ button:active {
     filter: none;
 }
 
-.sidebar .svg-btn:focus {
+.sidebar .svg-btn:not(#addProjBtn):focus {
     filter: brightness(90%);
+}
+
+.sidebar .svg-btn:hover {
+    filter: brightness(95%);
 }
 
 .dropdown-content .svg-btn,
@@ -133,12 +154,7 @@ button:active {
 }
 
 
-.main-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
+/* Drop down styling */
 .drop-down {
     position: relative;
     display: inline-block;
@@ -147,8 +163,9 @@ button:active {
 .drop-down > div {
     display: none;
     position: absolute;
+    right: 0;
     background-color: transparent;
-    min-width: 160px;
+
     z-index: 1;
 }
 

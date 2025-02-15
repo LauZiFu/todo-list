@@ -12,25 +12,28 @@ export default class TodoView{
             logMessage("Todo Item does not exist in DOM") 
             return false;
         }
-
         const todoDiv = document.createElement("div");
         const todoTitle = document.createElement("h2");
         const description = document.createElement("p")
-        const priorityLogo = document.createElement("span");
-        const checkBox = document.createElement("input");
-        const actionContianer = document.createElement("div");
-
+        const actionContianer = this.#renderActions(todoItem);
         todoDiv.dataset.key = todoItem.id;
         todoDiv.id = getDOMtodoID(todoItem.id);
-
-        actionContianer.classList.toggle("actions");
         todoDiv.classList.toggle("todo-item");
-        checkBox.setAttribute("type", "checkbox");
         todoTitle.textContent = todoItem.title;
-        priorityLogo.textContent = "#";
         description.textContent = todoItem.description;
+        addChildren(todoDiv, [todoTitle, description, actionContianer]);
+        return todoDiv;
+    }
+
+    static #renderActions(todoItem){
+        const actionContainer = document.createElement("div");
+        const checkBox = document.createElement("input");
+        const priorityLogo = document.createElement("span");
+        actionContainer.classList.toggle("actions");
+        checkBox.setAttribute("type", "checkbox");
+        priorityLogo.textContent = "#";
         priorityLogo.style.color = getRGBColor(todoItem.priority, MAXPRIORITY, MINPRIORITY);
-        
+
         const deleteBtn = createButton({textContent:"Delete", callback: (event) => {
             // Must parse int before reading.
             let projectId = parseInt(event.target.closest(".project").dataset.key);
@@ -38,14 +41,21 @@ export default class TodoView{
             ProjectsControl.removeTodo(projectId, todoId);
         }});
 
-        addChildren(actionContianer, [checkBox, priorityLogo, deleteBtn]);
-        addChildren(todoDiv, [todoTitle, description, actionContianer]);
+        checkBox.addEventListener("change", (e)=>{
+            if(e.target.checked){
+                todoItem.markComplete();
+            } else {
+                todoItem.markIncomplete();
+            }
+        })
 
-        return todoDiv;
+        addChildren(actionContainer, [checkBox, priorityLogo, deleteBtn]);
+        return actionContainer;
     }
 
     static remove(todoId){
         const todoDiv = document.getElementById(getDOMtodoID(todoId));
         if(todoDiv) todoDiv.remove();
     }
+
 }

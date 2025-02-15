@@ -3,12 +3,12 @@ import { BTree } from "@tylerbu/sorted-btree-es6";
 export default class TodoTree {
     #tree;
 
-    constructor(itemList = []){
-        this.#tree = new BTree(itemList);
+    constructor(itemList = [], callback = undefined){
+        this.#tree = callback ? new BTree(itemList, callback) : new BTree(itemList);
     }
     
     insert(todoItem){
-        this.#tree.setIfNotPresent(todoItem.id, todoItem);
+        this.#tree.set(todoItem.id, todoItem);
     }
 
     delete(id) {
@@ -16,7 +16,7 @@ export default class TodoTree {
     }
 
     getSortedList(){
-        return this.#tree.valuesArray();
+        return [...this.#tree.valuesArray()];
     }
 
     getItem(id){

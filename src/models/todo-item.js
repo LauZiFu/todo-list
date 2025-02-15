@@ -25,6 +25,10 @@ export default class TodoItem {
         this.#completed = true;
     }
 
+    markIncomplete(){
+        this.#completed = false;
+    }
+
     /**
      * 
      * @returns {Boolean}

@@ -21,5 +21,6 @@ export default class SidebarView{
         addChildren(projectNav, sideButtons);
         sideButtons[sideButtons.length-1].dispatchEvent(new Event("click"));
     }
+    
 }
 

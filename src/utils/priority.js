@@ -2,7 +2,7 @@
 
 // Number to pad priority with
 const PRIORITYPAD = 1e9;
-export const MINPRIORITY = 10;
+export const MINPRIORITY = 5;
 export const MAXPRIORITY = 1;
 
 /**

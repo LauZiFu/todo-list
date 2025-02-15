@@ -4,6 +4,7 @@ import Project from "../models/project.js";
 import TodoItem from "../models/todo-item.js";
 import TodoTree from "../models/data-structures/todo-tree.js";
 import ProjectList from "../models/data-structures/project-list.js";
+import { prettyPrintJSON } from "../utils/string.js";
 
 // Manages all projects
 export default class ProjectService {
@@ -67,6 +68,7 @@ export default class ProjectService {
 
     static changeFilter(projectId, dataStructure){
         this.projects.getItem(projectId).changeFilter(dataStructure);
+
     }
 
     static getTodo(projectId, todoId){
