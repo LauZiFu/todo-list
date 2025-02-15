@@ -25,7 +25,7 @@ export const ProjectRepo = {
                 items.push(JSON.parse(localStorage.getItem(key)));
         }
         return items;
-    }
+    },
 
     deleteProject(id){
         if (!localStorage.getItem(`project-${id}`)) 

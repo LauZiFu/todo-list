@@ -4,8 +4,6 @@ import MainView from "./views/main-view.js";
 import { prettyPrintJSON } from "./utils/string.js";
 import "./styles/styles.css";
 
-ProjectsControl.addProject({name: "Lol", description:"asdfasd"});
-ProjectsControl.addProject({name: "hahah", description:"asdasd"});
 
 MainView.render();
 console.log( prettyPrintJSON(ProjectService.json()));

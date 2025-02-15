@@ -16,22 +16,35 @@ export default class TodoView{
         const todoTitle = document.createElement("h2");
         const description = document.createElement("p")
         const actionContianer = this.#renderActions(todoItem);
+        const checkBox = document.createElement("input");
+
+        checkBox.setAttribute("type", "checkbox");
+        checkBox.addEventListener("change", (e)=>{
+            if(e.target.checked){
+                todoItem.markComplete();
+            } else {
+                todoItem.markIncomplete();
+            }
+        })
+
         todoDiv.dataset.key = todoItem.id;
         todoDiv.id = getDOMtodoID(todoItem.id);
         todoDiv.classList.toggle("todo-item");
         todoTitle.textContent = todoItem.title;
         description.textContent = todoItem.description;
-        addChildren(todoDiv, [todoTitle, description, actionContianer]);
+
+        if(description.textContent === ""){
+            description.style.display = "none";
+        }
+
+        addChildren(todoDiv, [checkBox, todoTitle, description, actionContianer]);
         return todoDiv;
     }
 
     static #renderActions(todoItem){
         const actionContainer = document.createElement("div");
-        const checkBox = document.createElement("input");
         const priorityLogo = document.createElement("span");
-        actionContainer.classList.toggle("actions");
-        checkBox.setAttribute("type", "checkbox");
-        priorityLogo.textContent = "#";
+        actionContainer.classList.toggle("actions");        priorityLogo.textContent = "#";
         priorityLogo.style.color = getRGBColor(todoItem.priority, MAXPRIORITY, MINPRIORITY);
 
         const deleteBtn = createButton({textContent:"Delete", callback: (event) => {
@@ -41,15 +54,7 @@ export default class TodoView{
             ProjectsControl.removeTodo(projectId, todoId);
         }});
 
-        checkBox.addEventListener("change", (e)=>{
-            if(e.target.checked){
-                todoItem.markComplete();
-            } else {
-                todoItem.markIncomplete();
-            }
-        })
-
-        addChildren(actionContainer, [checkBox, priorityLogo, deleteBtn]);
+        addChildren(actionContainer, [priorityLogo, deleteBtn]);
         return actionContainer;
     }
 

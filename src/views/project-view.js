@@ -13,6 +13,7 @@ export default class ProjectView{
         projectDiv.id = getDOMprojectID(project.id);
         projectDiv.dataset.key = project.id;
         projectDiv.classList.toggle("project");
+        projectDiv.classList.toggle("container");
 
         const addTaskBtn = document.createElement("button");
         const filterBtn = document.querySelector("#filter-btn");
@@ -31,6 +32,7 @@ export default class ProjectView{
         mainContainer.appendChild(projectDiv);
 
         addTaskBtn.textContent = "Add Task";
+        addTaskBtn.classList.toggle("svg-btn");
         addTaskBtn.classList.toggle("add-task-btn");
         addTaskBtn.addEventListener("click", ()=>{
             formDialog.showModal();

@@ -37,6 +37,7 @@ export class ProjectsControl{
     }
 
     static changeFilter(projectId, filter){
+        console.log("ol");
         if(validateFilter(filter) && validateWholeNumber(projectId)){
             const newFilter = new FILTERS[filter]();
             ProjectService.changeFilter(projectId, newFilter);

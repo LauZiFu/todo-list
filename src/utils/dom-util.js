@@ -1,6 +1,4 @@
 
-
-
 export function getRGBColor(value, min, max){
     let normalized = (value - min)/(max - min);
     normalized = Math.max(0, Math.min(1, normalized));
@@ -71,3 +69,65 @@ export function createButton({textContent = "", callback = undefined, style = ""
     return btn;
 }
 
+export function createDropDown(textContent, menuContent = []){
+    const dropDown = document.createElement("div");
+    dropDown.classList.toggle("drop-down");
+
+    const dropDownBtn = createButton({textContent});
+    dropDownBtn.textContent = textContent;
+    dropDownBtn.dataset.focused = "false"; // Store focus state in dataset
+
+    dropDownBtn.addEventListener("click", function() {
+        if (dropDownBtn.dataset.focused === "false") {
+            dropDownBtn.focus();
+            dropDownBtn.dataset.focused = "true";
+        } else {
+            setTimeout(() => {
+                dropDownBtn.blur();
+                dropDownBtn.dataset.focused = "false";
+            }, 0);
+        }
+    });
+
+
+    const contentDiv = document.createElement("div");
+    const dropDownMenu = document.createElement("div");
+    addChildren(dropDownMenu,menuContent);
+
+    addChildren(dropDown, [dropDownBtn, contentDiv])
+    contentDiv.appendChild(dropDownMenu);
+    dropDownMenu.classList.toggle("dropdown-content");
+
+    // Reset state when focus is lost (e.g., clicking outside)
+    dropDownBtn.addEventListener("focus", ()=>{
+        adjustDropdownPosition(contentDiv);
+    });
+
+    // Reset state when focus is lost (e.g., clicking outside)
+    dropDownBtn.addEventListener("blur", function() {
+        adjustDropdownPosition(contentDiv);
+        dropDownBtn.dataset.focused = "false";
+    });
+
+    return dropDown;
+}
+
+/**
+ * Adjust dropdown position to fit within the viewport
+ */
+export function adjustDropdownPosition(dropdown) {
+
+    const dropdownRect = dropdown.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+
+    // If dropdown overflows right, shift it to the left
+    if (dropdownRect.right > viewportWidth) {
+        dropdown.style.right = "0"; // Align to right
+        dropdown.style.left = "auto";
+    } else {
+        dropdown.style.left = "0"; // Default left alignment
+        dropdown.style.right = "auto";
+    }
+
+
+}
